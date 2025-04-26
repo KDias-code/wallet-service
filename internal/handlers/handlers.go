@@ -9,6 +9,7 @@ import (
 type IHandlers interface {
 	GetBalance(c fiber.Ctx) error
 	ChangeBalance(c fiber.Ctx) error
+	GetHistory(c fiber.Ctx) error
 }
 type Handlers struct {
 	logger  hclog.Logger

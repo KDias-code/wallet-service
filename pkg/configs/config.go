@@ -3,8 +3,9 @@ package configs
 import "github.com/spf13/viper"
 
 type Config struct {
-	Port string `mapstructure:"PORT"`
-	Db   string `mapstructure:"DB"`
+	Port         string `mapstructure:"PORT"`
+	Db           string `mapstructure:"DB"`
+	SecretStripe string `mapstructure:"SECRET_STRIPE"`
 }
 
 func LoadConfigs() (*Config, error) {
@@ -18,6 +19,10 @@ func LoadConfigs() (*Config, error) {
 		return nil, err
 	}
 	err = v.BindEnv("DB")
+	if err != nil {
+		return nil, err
+	}
+	err = v.BindEnv("SECRET_STRIPE")
 	if err != nil {
 		return nil, err
 	}

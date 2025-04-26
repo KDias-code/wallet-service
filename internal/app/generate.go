@@ -31,7 +31,7 @@ func (s *server) generate(conf *configs.Config) {
 	}
 
 	stores := store.NewStore(dbConnection)
-	services := service.NewServices(stores)
+	services := service.NewServices(stores, conf.SecretStripe)
 	s.handlers = handlers.NewHandlers(s.logger, services)
 
 	s.router()

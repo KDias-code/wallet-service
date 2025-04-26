@@ -8,13 +8,16 @@ import (
 type IService interface {
 	GetBalance(id string) (models.GetBalanceResponse, error)
 	ChangeBalance(req models.ChangeBalanceRequest) (float64, error)
+	GetHistory(studentId string) (*[]models.HistoryResponse, error)
 }
 type Service struct {
-	store store.IStore
+	store        store.IStore
+	secretStripe string
 }
 
-func NewServices(store store.IStore) *Service {
+func NewServices(store store.IStore, secretStripe string) *Service {
 	return &Service{
-		store: store,
+		store:        store,
+		secretStripe: secretStripe,
 	}
 }
