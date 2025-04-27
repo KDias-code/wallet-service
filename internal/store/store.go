@@ -8,8 +8,9 @@ import (
 type IStore interface {
 	GetBalance(id string) (models.GetBalanceResponse, error)
 	ChangeBalance(req models.ChangeBalanceRequest) error
-	HistoryAdd(amount float64, studentId string) error
+	HistoryAdd(amount float64, studentId, method string) error
 	GetHistory(studentId string) (*[]models.HistoryResponse, error)
+	HistoryOfTrips(studentId string) (*[]models.HistoryResponse, error)
 }
 type Store struct {
 	db *sqlx.DB

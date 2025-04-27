@@ -19,9 +19,26 @@ func (s *Store) GetBalance(id string) (models.GetBalanceResponse, error) {
 
 func (s *Store) GetHistory(studentId string) (*[]models.HistoryResponse, error) {
 	query := `
-		SELECT id, student_id, replenishment, change_date
+		SELECT id, student_id, replenishment, change_date, method
 		FROM history
 		WHERE student_id = ?`
+
+	var history []models.HistoryResponse
+
+	err := s.db.Select(&history, query, studentId)
+	if err != nil {
+		log.Printf("Ошибка при получении истории для студента %s: %v", studentId, err)
+		return nil, err
+	}
+
+	return &history, nil
+}
+
+func (s *Store) HistoryOfTrips(studentId string) (*[]models.HistoryResponse, error) {
+	query := `
+		SELECT id, student_id, replenishment, change_date, method
+		FROM history
+		WHERE student_id = ? AND method = paid`
 
 	var history []models.HistoryResponse
 

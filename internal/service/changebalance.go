@@ -18,7 +18,7 @@ func (s *Service) ChangeBalance(req models.ChangeBalanceRequest) (float64, error
 			return 0, err
 		}
 
-		err = s.store.HistoryAdd(req.Change, req.ID)
+		err = s.store.HistoryAdd(req.Change, req.ID, "added")
 		if err != nil {
 			return 0, err
 		}
@@ -40,7 +40,7 @@ func (s *Service) ChangeBalance(req models.ChangeBalanceRequest) (float64, error
 			return 0, err
 		}
 
-		err = s.store.HistoryAdd(req.Change, req.ID)
+		err = s.store.HistoryAdd(req.Change, req.ID, "paid")
 		if err != nil {
 			return 0, err
 		}

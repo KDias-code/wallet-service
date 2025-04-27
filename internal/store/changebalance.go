@@ -24,11 +24,11 @@ func (s *Store) ChangeBalance(req models.ChangeBalanceRequest) error {
 	return nil
 }
 
-func (s *Store) HistoryAdd(amount float64, studentId string) error {
+func (s *Store) HistoryAdd(amount float64, studentId, method string) error {
 	now := time.Now()
-	query := `INSERT INTO history (student_id, replenishment, change_date) VALUES ($1, $2, $3)`
+	query := `INSERT INTO history (student_id, replenishment, change_date, method) VALUES ($1, $2, $3, $4)`
 
-	_, err := s.db.Exec(query, studentId, amount, now)
+	_, err := s.db.Exec(query, studentId, amount, now, method)
 	if err != nil {
 		return err
 	}

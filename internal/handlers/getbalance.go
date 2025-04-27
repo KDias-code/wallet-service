@@ -35,3 +35,22 @@ func (h *Handlers) GetHistory(c fiber.Ctx) error {
 
 	return c.Status(200).JSON(balance)
 }
+
+func (h *Handlers) GetHistoryOfTrips(c fiber.Ctx) error {
+	id := c.Params("student_id")
+	if id == "" {
+		return c.Status(400).JSON("ID must be provided")
+	}
+
+	history, err := h.service.GetHistoryOfTrips(id)
+	if err != nil {
+		h.logger.Error("Error getting history: ", err)
+		return c.Status(500).JSON(err)
+	}
+
+	if history == nil {
+		return c.Status(400).JSON("history is nil")
+	}
+
+	return c.Status(200).JSON(*history)
+}

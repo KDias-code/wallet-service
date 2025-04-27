@@ -16,4 +16,5 @@ type HistoryResponse struct {
 	StudentID     string  `json:"student_id" db:"student_id"`
 	Replenishment float64 `json:"replenishment" db:"replenishment"`
 	ChangeDate    string  `json:"change_date" db:"change_date"`
+	Method        string  `json:"method" db:"method"`
 }

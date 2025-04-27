@@ -25,3 +25,16 @@ func (s *Service) GetHistory(studentId string) (*[]models.HistoryResponse, error
 
 	return response, nil
 }
+
+func (s *Service) GetHistoryOfTrips(studentId string) (*[]models.HistoryResponse, error) {
+	resp, err := s.store.HistoryOfTrips(studentId)
+	if err != nil {
+		return nil, err
+	}
+
+	if resp == nil {
+		return nil, nil
+	}
+
+	return resp, nil
+}
