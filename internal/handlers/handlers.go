@@ -11,6 +11,7 @@ type IHandlers interface {
 	ChangeBalance(c fiber.Ctx) error
 	GetHistory(c fiber.Ctx) error
 	GetHistoryOfTrips(c fiber.Ctx) error
+	ActiveTickets(c fiber.Ctx) error
 }
 type Handlers struct {
 	logger  hclog.Logger

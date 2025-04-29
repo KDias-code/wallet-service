@@ -2,6 +2,7 @@ package service
 
 import (
 	"diplom/wallet-service/internal/models"
+	"time"
 )
 
 func (s *Service) GetBalance(id string) (models.GetBalanceResponse, error) {
@@ -34,6 +35,18 @@ func (s *Service) GetHistoryOfTrips(studentId string) (*[]models.HistoryResponse
 
 	if resp == nil {
 		return nil, nil
+	}
+
+	return resp, nil
+}
+
+func (s *Service) ActiveTickets(studentId string) ([]models.HistoryResponse, error) {
+	now := time.Now()
+	thirtyMinutesAgo := now.Add(-30 * time.Minute)
+
+	resp, err := s.store.ActiveTickets(studentId, thirtyMinutesAgo)
+	if err != nil {
+		return nil, err
 	}
 
 	return resp, nil

@@ -10,6 +10,7 @@ type IService interface {
 	ChangeBalance(req models.ChangeBalanceRequest) (float64, error)
 	GetHistory(studentId string) (*[]models.HistoryResponse, error)
 	GetHistoryOfTrips(studentId string) (*[]models.HistoryResponse, error)
+	ActiveTickets(studentId string) ([]models.HistoryResponse, error)
 }
 type Service struct {
 	store        store.IStore

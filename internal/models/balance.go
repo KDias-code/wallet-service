@@ -17,4 +17,5 @@ type HistoryResponse struct {
 	Replenishment float64 `json:"replenishment" db:"replenishment"`
 	ChangeDate    string  `json:"change_date" db:"change_date"`
 	Method        string  `json:"method" db:"method"`
+	BusNum        string  `json:"bus_num" db:"bus_num"`
 }

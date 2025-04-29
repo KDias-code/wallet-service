@@ -1,6 +1,8 @@
 package handlers
 
-import "github.com/gofiber/fiber/v3"
+import (
+	"github.com/gofiber/fiber/v3"
+)
 
 func (h *Handlers) GetBalance(c fiber.Ctx) error {
 	id := c.Params("student_id")
@@ -53,4 +55,18 @@ func (h *Handlers) GetHistoryOfTrips(c fiber.Ctx) error {
 	}
 
 	return c.Status(200).JSON(*history)
+}
+
+func (h *Handlers) ActiveTickets(c fiber.Ctx) error {
+	id := c.Params("student_id")
+	if id == "" {
+		return c.Status(400).JSON("ID must be provided")
+	}
+
+	resp, err := h.service.ActiveTickets(id)
+	if err != nil {
+		h.logger.Error("Error getting balance: ", err)
+	}
+
+	return c.Status(200).JSON(resp)
 }
